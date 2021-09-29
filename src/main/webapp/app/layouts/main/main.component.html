@@ -1,0 +1,20 @@
+<jhi-page-ribbon></jhi-page-ribbon>
+
+<div>
+    <router-outlet name="navbar"></router-outlet>
+</div>
+
+<div class="main-wrapper">
+    <span *ngIf="isAuthenticated()">
+        <jhi-left-side-menu [style.display]="isToggle?'inline':'none'"[style.width.px]="sideWidth"  ></jhi-left-side-menu>
+    </span>
+    <div class="container-fluid">
+        <span>
+            <div class="card jh-card">
+                <router-outlet></router-outlet>
+            </div>
+            <jhi-footer></jhi-footer>
+        </span>
+
+    </div>
+</div>

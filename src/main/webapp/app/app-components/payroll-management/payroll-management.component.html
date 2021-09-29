@@ -1,0 +1,71 @@
+
+<div class="form-row align-items-end" >
+    <div class="col-md-12">
+        <jhi-alert></jhi-alert>
+        <jhi-alert-error></jhi-alert-error>
+    </div>
+    <div class="form-group col-md-2">
+        <label class="form-control-label" for="field_year">Year</label>
+        <select class="form-control" id="field_year" name="year" [(ngModel)]="selectedYear">
+            <option [value]="yearOption"  *ngFor="let yearOption of years">{{yearOption}}</option>
+        </select>
+    </div>
+    <div class="form-group col-md-2">
+        <label class="form-control-label" for="field_month">Month</label>
+        <select class="form-control" name="month"  id="field_month" [(ngModel)]="selectedMonth">
+            <option value="JANUARY">JANUARY</option>
+            <option value="FEBRUARY">FEBRUARY</option>
+            <option value="MARCH">MARCH</option>
+            <option value="APRIL">APRIL</option>
+            <option value="MAY">MAY</option>
+            <option value="JUNE">JUNE</option>
+            <option value="JULY">JULY</option>
+            <option value="AUGUST">AUGUST</option>
+            <option value="SEPTEMBER">SEPTEMBER</option>
+            <option value="OCTOBER">OCTOBER</option>
+            <option value="NOVEMBER">NOVEMBER</option>
+            <option value="DECEMBER">DECEMBER</option>
+        </select>
+    </div>
+    <div class="form-group col-md-2">
+        <label class="form-control-label" for="field_designation">Department</label>
+        <select class="form-control" id="field_designation" name="designation" [(ngModel)]="selectedDepartmentId" (ngModelChange)="departmentIdChanged()">
+            <option></option>
+            <option [ngValue]="departmentOption.id" *ngFor="let departmentOption of departments">{{departmentOption.name}}</option>
+        </select>
+    </div>
+
+
+    <div class="form-group col-md-2" style="align-items: end;">
+        <button class="btn btn-secondary" (click)="navigate()">Fetch</button>
+    </div>
+</div>
+
+<div class="row alert alert-warning" *ngIf="monthlySalary">
+    <div class="col-md-8">
+        Payroll of the month <b>{{this.selectedMonth}}</b> status: <b>{{this.monthlySalary.status === 'DONE'? 'Payroll Generated': 'Payroll Not Generated'}}</b>
+    </div>
+    <div class="col-md-4 btn-group" *ngIf="monthlySalary.status==='DONE'" align="right">
+        <button class="btn btn-primary" (click)="regenerateSalaries()">Re-Generate Payroll</button>
+        <button class="btn btn-success" (click)="downloadDepositSlips()">Pay Slips</button>
+    </div>
+
+    <div class="col-md-4" *ngIf="monthlySalary.status==='NOT_DONE'" align="right">
+        <button class="btn btn-secondary" (click)="generateSalaries()">Generate Payroll</button>
+    </div>
+    <div class="col-md-12">
+
+    </div>
+</div>
+
+<div class="row" *ngIf="showLoader">
+    <div class="col-md-12" align="center">
+        <span><fa-icon icon="spinner" [pulse]="true" size="3x"></fa-icon></span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <router-outlet></router-outlet>
+    </div>
+</div>

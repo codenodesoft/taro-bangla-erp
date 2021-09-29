@@ -1,0 +1,574 @@
+
+entity Company (mst_company){
+   name String required,
+   shortName String,
+   nameInBangla String,
+   description TextBlob,
+   address TextBlob,
+   phone String
+}
+
+entity Department (mst_department) {
+	name String required,
+    shortName String,
+    nameInBangla String,
+    description TextBlob
+}
+
+entity Line (line){
+    name String required,
+    description TextBlob
+}
+
+entity Designation (mst_designation){
+    category EmployeeCategory,
+	name String required,
+	shortName String,
+	nameInBangla String,
+    description TextBlob
+}
+
+entity Grade (mst_grade){
+    category EmployeeCategory,
+	name String required,
+    description TextBlob,
+    initialSalary BigDecimal
+}
+
+entity Division (mst_division){
+    name String required,
+    bangla String required,
+    web String,
+}
+
+entity District (mst_district){
+    name String required,
+    bangla String required,
+    web String,
+}
+
+entity Thana (mst_thana){
+    name String required,
+    bangla String required,
+    web String,
+}
+
+
+entity Employee (mst_employee){
+    name String required,
+    empId String required,
+    globalId String required,
+    attendanceMachineId String,
+    // company
+    localId String required,
+    //department
+    //grade
+    //designation
+    category EmployeeCategory,
+    type EmployeeType,
+    joiningDate LocalDate,
+    status EmployeeStatus,
+    terminationDate LocalDate,
+    terminationReason TextBlob
+}
+
+entity PersonalInfo {
+    name String required,
+    banglaName String required,
+    photo Blob,
+    photoId String,
+    fatherName String required,
+    fatherNameBangla String,
+    motherName String required,
+    motherNameBangla String,
+    maritalStatus MaritalStatus,
+    spouseName String,
+    spouseNameBangla String ,
+    dateOfBirth LocalDate,
+    nationalId String,
+    nationalIdAttachment Blob,
+    nationalIdAttachmentId String,
+    birthRegistration String,
+    birthRegistrationAttachment Blob,
+    birthRegistrationAttachmentId String,
+    height Double,
+    gender GenderType,
+    religion ReligionType,
+    bloodGroup BloodGroupType,
+    emergencyContact String,
+}
+
+entity Address (address){
+    //division
+    //district
+    //thana
+    presentThanaTxt String,
+    presentStreet String,
+    presentStreetBangla String,
+    presentArea String,
+    presentAreaBangla String,
+    presentPostCode Integer,
+    presentPostCodeBangla String,
+    permanentThanaTxt String,
+    permanentStreet String,
+    permanentStreetBangla String,
+    permanentArea String,
+    permanentAreaBangla String
+    permanentPostCode Integer,
+    permenentPostCodeBangla String,
+    isSame Boolean
+}
+
+entity EducationalInfo (educational_info){
+    serial Integer required,
+    degree String required,
+    institution String required,
+    passingYear Integer required,
+    courseDuration Integer,
+    attachment Blob
+}
+
+entity Training (training){
+    serial Integer required,
+    name String required,
+    trainingInstitute String required,
+    receivedOn LocalDate,
+    attachment Blob,
+}
+
+entity EmployeeAccount (emp_account){
+    accountType AccountType required,
+    accountNo String required,
+    isSalaryAccount Boolean
+}
+
+entity JobHistory (job_history){
+    serial Integer required,
+    organization String required,
+    designation String required,
+    from LocalDate,
+    to LocalDate,
+    payScale BigDecimal,
+    totalExperience Double
+}
+
+entity IdCardManagement{
+    //employee
+    cardNo String,
+    issueDate LocalDate,
+    ticketNo String,
+    validTill LocalDate
+}
+
+entity ServiceHistory (service_history){
+    //department
+    //designation
+    //grade
+    employeeType EmployeeType,
+    category EmployeeCategory,
+    from LocalDate,
+    to LocalDate,
+    attachment Blob,
+    status ServiceStatus
+}
+
+entity Fine (fine){
+  //employee
+  finedOn LocalDate required,
+  reason TextBlob,
+  amount BigDecimal required,
+  finePercentage BigDecimal required,
+  monthlyFineAmount BigDecimal required,
+  paymentStatus PaymentStatus,
+  amountPaid BigDecimal,
+  amountLeft BigDecimal
+}
+
+entity FinePaymentHistory (fine_payment_history){
+  //fine
+  year Integer,
+  monthType MonthType,
+  amount BigDecimal,
+  beforeFine BigDecimal,
+  afterFine BigDecimal
+}
+
+entity Advance (advance){
+  //employee
+  providedOn LocalDate required,
+  reason TextBlob,
+  amount BigDecimal required,
+  paymentPercentage BigDecimal required,
+  monthlyPaymentAmount BigDecimal required,
+  paymentStatus PaymentStatus,
+  amountPaid BigDecimal,
+  amountLeft BigDecimal
+}
+
+entity AdvancePaymentHistory (advance_payment_history){
+  //fine
+  year Integer,
+  monthType MonthType,
+  amount BigDecimal,
+  before BigDecimal,
+  after BigDecimal
+}
+
+entity FestivalAllowanceTimeLine{
+    year Integer,
+    month MonthType
+}
+
+
+
+entity DefaultAllowance (default_allowance){
+  basic BigDecimal,
+  basicPercent BigDecimal
+  totalAllowance BigDecimal required,
+  medicalAllowance BigDecimal,
+  medicalAllowancePercent BigDecimal,
+  convinceAllowance BigDecimal,
+  convinceAllowancePercent BigDecimal,
+  foodAllowance BigDecimal,
+  foodAllowancePercent BigDecimal,
+  festivalAllowance BigDecimal,
+  festivalAllowancePercent BigDecimal,
+  status ActiveStatus required unique
+}
+
+
+entity EmployeeSalary (employee_salary){
+  gross BigDecimal required,
+  incrementAmount BigDecimal required,
+  incrementPercentage BigDecimal,
+  salaryStartDate Instant required,
+  salaryEndDate Instant required,
+  nextIncrementDate Instant,
+  basic BigDecimal required,
+  basicPercent BigDecimal,
+  houseRent BigDecimal required,
+  houseRentPercent BigDecimal,
+  totalAllowance BigDecimal,
+  medicalAllowance BigDecimal,
+  medicalAllowancePercent BigDecimal,
+  convinceAllowance BigDecimal,
+  convinceAllowancePercent BigDecimal,
+  foodAllowance BigDecimal,
+  foodAllowancePercent BigDecimal,
+  specialAllowanceActiveStatus ActiveStatus,
+  specialAllowance BigDecimal,
+  specialAllowancePercent BigDecimal,
+  specialAllowanceDescription TextBlob,
+  insuranceActiveStatus ActiveStatus,
+  insuranceAmount BigDecimal,
+  insurancePercent BigDecimal,
+  insuranceDescription TextBlob,
+  insuranceProcessType InsuranceProcessType,
+  status ActiveStatus required
+}
+
+
+
+entity MonthlySalary (monthly_salary){
+  //designation
+  year Integer,
+  month MonthType,
+  fromDate Instant,
+  toDate Instant,
+  status SalaryExecutionStatus,
+  executedOn Instant,
+  executedBy String
+}
+
+entity MonthlySalaryDtl (monthly_salary_dtl){
+  // monthlySalary
+  // employee
+    gross BigDecimal,
+    basic BigDecimal,
+    basicPercent BigDecimal,
+    houseRent BigDecimal,
+    houseRentPercent BigDecimal,
+    medicalAllowance BigDecimal,
+    medicalAllowancePercent BigDecimal,
+    convinceAllowance BigDecimal,
+    convinceAllowancePercent BigDecimal,
+    foodAllowance BigDecimal,
+    foodAllowancePercent BigDecimal,
+    fine BigDecimal,
+    advance BigDecimal,
+    totalWorkingDays Integer,
+    regularLeave Integer,
+    sickLeave Integer,
+    compensationLeave Integer,
+    festivalLeave Integer,
+    weeklyLeave Integer,
+    present Integer,
+    absent Integer,
+    totalMonthDays Integer,
+    overTimeHour Double,
+    overTimeSalaryHourly BigDecimal,
+    overTimeSalary BigDecimal,
+    presentBonus BigDecimal,
+    absentFine BigDecimal,
+    stampPrice BigDecimal,
+    tax BigDecimal,
+    others BigDecimal,
+    totalPayable BigDecimal,
+    status SalaryExecutionStatus,
+    type PayrollGenerationType,
+    executedOn Instant,
+    executedBy String,
+    note TextBlob
+}
+
+
+
+entity PartialSalary (partial_salary){
+  // employee
+    year Integer required,
+    month MonthType required,
+    totalMonthDays Integer required,
+    fromDate Instant required,
+    toDate Instant required,
+    gross BigDecimal,
+    basic BigDecimal,
+    basicPercent BigDecimal,
+    houseRent BigDecimal,
+    houseRentPercent BigDecimal,
+    medicalAllowance BigDecimal,
+    medicalAllowancePercent BigDecimal,
+    convinceAllowance BigDecimal,
+    convinceAllowancePercent BigDecimal,
+    foodAllowance BigDecimal,
+    foodAllowancePercent BigDecimal,
+    fine BigDecimal,
+    advance BigDecimal,
+    status SalaryExecutionStatus,
+    executedOn Instant,
+    executedBy String,
+    note TextBlob
+}
+
+entity OverTime{
+    // designation
+    // employee
+    year Integer,
+    month MonthType,
+    fromDate Instant,
+    toDate Instant,
+    totalOverTime Double,
+    officialOverTime Double,
+    extraOverTime Double,
+    totalAmount BigDecimal,
+    officialAmount BigDecimal,
+    extraAmount BigDecimal,
+    note TextBlob,
+    executedOn Instant,
+    executedBy String
+}
+
+entity FestivalAllowancePayment{
+    // designation
+    year Integer,
+    month MonthType,
+    status SalaryExecutionStatus,
+    executedOn Instant,
+    executedBy String
+}
+
+entity ScheduledEmployeeLeaveApplication (sch_emp_leave_app){
+    leaveApplicationId Long,
+    executedOn Instant
+}
+
+entity EmployeeLeaveDate{
+   //employee
+   leaveDate LocalDate
+}
+
+entity FestivalAllowancePaymentDtl{
+    // festivalAllowancePayment
+    // employee
+    amount BigDecimal,
+    status SalaryExecutionStatus,
+    executedOn Instant,
+    executedBy String,
+    note TextBlob
+}
+
+enum InsuranceProcessType{
+  PROCESS_WITH_SALARY,
+  PROCESS_SEPARATELY
+}
+
+enum SalaryExecutionStatus{
+  DONE,
+  NOT_DONE
+}
+
+enum PayrollGenerationType{
+ FULL,
+ PARTIAL
+}
+
+enum ServiceStatus{
+ ACTIVE,
+ NOT_ACTIVE
+}
+
+enum ActiveStatus{
+ ACTIVE ,
+ NOT_ACTIVE
+}
+
+enum AllowanceDependabilityCategory{
+    GROSS,
+    BASIC
+}
+
+enum AllowanceDependabilityType{
+  INCLUDE,
+  EXCLUDE
+}
+
+enum PaymentStatus{
+  NOT_PAID,
+  IN_PROGRESS,
+  PAID
+}
+
+enum AccountType{
+    BANK,
+    BKASH,
+    ROCKET,
+    NAGAD,
+    OTHERS
+}
+
+enum EmployeeType{
+    PERMANENT,
+    TEMPORARY,
+    PART_TIME,
+    CONTRACTUAL
+}
+
+enum EmployeeCategory{
+    TOP_LEVEL,
+    MID_LEVEL,
+    STAFF,
+    WORKER
+}
+
+enum MaritalStatus{
+    SINGLE,
+    MARRIED
+}
+
+enum ReligionType{
+ ISLAM,
+ HINDU,
+ BUDDHIST,
+ CHRISTIAN,
+ OTHERS
+}
+
+enum GenderType{
+    MALE,
+    FEMALE,
+    OTHERS
+}
+
+enum EmployeeStatus{
+    ACTIVE,
+    TERMINATED
+}
+
+enum AddressType{
+    PRESENT,
+    PERMANENT
+}
+
+enum BloodGroupType{
+   A_POSITIVE,
+   A_NEGATIVE,
+   B_POSITIVE,
+   B_NEGATIVE,
+   O_POSITIVE,
+   O_NEGATIVE,
+   AB_POSITIVE,
+   AB_NEGATIVE
+}
+
+enum MonthType{
+ JANUARY,
+ FEBRUARY,
+ MARCH,
+ APRIL,
+ MAY,
+ JUNE,
+ JULY,
+ AUGUST,
+ SEPTEMBER,
+ OCTOBER,
+ NOVEMBER,
+ DECEMBER
+}
+
+
+
+relationship ManyToOne{
+    Employee{company(name)} to Company,
+    Employee{department(name)} to Department,
+    Employee{grade(name)} to Grade,
+    Employee{designation(name)} to Designation,
+    Employee{line(name)} to Line,
+    IdCardManagement{employee(name)} to Employee,
+    Line{department(name)} to Department,
+    District{division(name)} to Division,
+    Thana{district(name)} to District,
+    Address{presentDivision(name)} to Division,
+    Address{presentDistrict(name)} to District,
+    Address{presentThana(name)} to Thana,
+    Address{permanentDivision(name)} to Division,
+    Address{permanentDistrict(name)} to District,
+    Address{permanentThana(name)} to Thana,
+    ServiceHistory{department(name)} to Department,
+    ServiceHistory{designation(name)} to Designation,
+    ServiceHistory{grade(name)} to Grade,
+    MonthlySalary {department(name)} to Department,
+    MonthlySalaryDtl {employee(name)} to Employee,
+    FestivalAllowancePayment{designation(name)} to Designation,
+    FestivalAllowancePaymentDtl {employee(name)} to Employee,
+    OverTime{designation(name)} to Designation,
+    EmployeeLeaveDate{employee(name)} to Employee
+}
+
+relationship OneToMany{
+    FestivalAllowancePayment{festivalAllowancePaymentDtl} to FestivalAllowancePaymentDtl{festivalAllowancePayment},
+    Employee{partialSalary} to PartialSalary{employee(name) required},
+    Employee{overTime} to OverTime{employee(name)},
+    Employee{fine} to Fine{employee(name)},
+    Employee{advance} to Advance{employee(name)},
+    Employee{employeeSalary} to EmployeeSalary{employee(name)},
+    Fine{finePaymentHistory}  to FinePaymentHistory{fine},
+    Advance{advancePaymentHistory} to AdvancePaymentHistory{advance},
+    MonthlySalary{monthlySalaryDtl} to MonthlySalaryDtl{monthlySalary},
+    Employee{educationalInfo} to EducationalInfo{employee(name)},
+    Employee{training} to Training{employee(name)},
+    Employee{employeeAccount} to EmployeeAccount{employee(name)},
+    Employee{jobHistory} to JobHistory{employee(name)},
+    Employee{serviceHistory} to ServiceHistory{employee(name)},
+    ScheduledEmployeeLeaveApplication{employeeLeaveDate} to EmployeeLeaveDate{scheduledLeaveApplication}
+
+}
+
+
+relationship OneToOne{
+    Address{employee(name)} to Employee{address},
+    PersonalInfo{employee(name)} to Employee{personalInfo},
+}
+
+service Company, IdCardManagement, OverTime, MonthlySalary, PartialSalary, FestivalAllowancePayment, FestivalAllowancePaymentDtl, MonthlySalaryDtl, DefaultAllowance, EmployeeSalary, FestivalAllowanceTimeLine,  Line, Fine, FinePaymentHistory, Advance, AdvancePaymentHistory, Department, Designation, Grade, Employee, PersonalInfo, Division, District, Thana, Address, EducationalInfo, Training, EmployeeAccount, JobHistory, ServiceHistory with serviceClass
+filter Company, IdCardManagement, OverTime, MonthlySalary, PartialSalary, FestivalAllowancePayment, FestivalAllowancePaymentDtl, MonthlySalaryDtl, DefaultAllowance, EmployeeSalary, FestivalAllowanceTimeLine, Line, Fine, FinePaymentHistory, Advance, AdvancePaymentHistory, Department, Designation, Grade, Employee, PersonalInfo, Division, District, Thana, Address, EducationalInfo, Training, EmployeeAccount, JobHistory, ServiceHistory
+paginate Company, IdCardManagement, OverTime, MonthlySalary, PartialSalary, FestivalAllowancePayment, FestivalAllowancePaymentDtl, MonthlySalaryDtl, DefaultAllowance, EmployeeSalary, FestivalAllowanceTimeLine, Line, Fine, FinePaymentHistory, Advance, AdvancePaymentHistory, Department, Designation, Grade, Employee, PersonalInfo, Division, District, Thana, Address, EducationalInfo, Training, EmployeeAccount,JobHistory, ServiceHistory with pagination
+skipClient EmployeeLeaveDate, ScheduledEmployeeLeaveApplication

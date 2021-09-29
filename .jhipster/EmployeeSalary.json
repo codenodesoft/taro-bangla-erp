@@ -1,0 +1,160 @@
+{
+  "name": "EmployeeSalary",
+  "fields": [
+    {
+      "fieldName": "gross",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "incrementAmount",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "incrementPercentage",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "salaryStartDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "salaryEndDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "nextIncrementDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "basic",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "basicPercent",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "houseRent",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "houseRentPercent",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "totalAllowance",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "medicalAllowance",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "medicalAllowancePercent",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "convinceAllowance",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "convinceAllowancePercent",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "foodAllowance",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "foodAllowancePercent",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "specialAllowanceActiveStatus",
+      "fieldType": "ActiveStatus",
+      "fieldValues": "ACTIVE,NOT_ACTIVE"
+    },
+    {
+      "fieldName": "specialAllowance",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "specialAllowancePercent",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "specialAllowanceDescription",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "insuranceActiveStatus",
+      "fieldType": "ActiveStatus",
+      "fieldValues": "ACTIVE,NOT_ACTIVE"
+    },
+    {
+      "fieldName": "insuranceAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "insurancePercent",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "insuranceDescription",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "insuranceProcessType",
+      "fieldType": "InsuranceProcessType",
+      "fieldValues": "PROCESS_WITH_SALARY,PROCESS_SEPARATELY"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ActiveStatus",
+      "fieldValues": "ACTIVE,NOT_ACTIVE",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "employeeSalary",
+      "relationshipName": "employee",
+      "otherEntityField": "name"
+    }
+  ],
+  "changelogDate": "20210102143249",
+  "entityTableName": "employee_salary",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,286 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="kawsu (generated)" id="1628874815794-6">
+        <addColumn tableName="leave_application">
+            <column name="action_taken_by" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-7">
+        <addColumn tableName="leave_application">
+            <column name="action_taken_on" type="datetime(6)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-8">
+        <addColumn tableName="leave_application">
+            <column name="applied_by" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-9">
+        <addColumn tableName="leave_application">
+            <column name="applied_on" type="datetime(6)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-10">
+        <addColumn tableName="leave_application">
+            <column name="attachment" type="longblob"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-11">
+        <addColumn tableName="leave_application">
+            <column name="attachment_content_type" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-12">
+        <addColumn tableName="attendance">
+            <column name="attendance_data_upload_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-13">
+        <addColumn tableName="attendance">
+            <column name="attendance_date_time" type="datetime(6)" defaultValueDate="2008-02-12T12:34:03">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-14">
+        <addColumn tableName="attendance_data_upload">
+            <column name="created_on" type="datetime(6)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-15">
+        <addColumn tableName="leave_application">
+            <column name="employee_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-16">
+        <addColumn tableName="leave_type">
+            <column name="end_date" type="date"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-17">
+        <addColumn tableName="weekend">
+            <column name="end_date" type="date"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-18">
+        <addColumn tableName="attendance">
+            <column name="remarks" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-19">
+        <addColumn tableName="weekend">
+            <column name="remarks" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-20">
+        <addColumn tableName="leave_type">
+            <column name="start_date" type="date" defaultValueDate="2000-01-01">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-21">
+        <addColumn tableName="weekend">
+            <column name="start_date" type="date" defaultValueDate="2000-01-01">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-22">
+        <addColumn tableName="leave_type">
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-23">
+        <addForeignKeyConstraint baseColumnNames="grade_id" baseTableName="attendance_summary"
+                                 constraintName="FK4oqf17hpb7pnykdx17hdpkuwi" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="mst_grade"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-24">
+        <addForeignKeyConstraint baseColumnNames="employee_id" baseTableName="leave_balance"
+                                 constraintName="FK7b2i8m2yjsywq5wnarduij3px" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="mst_employee"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-25">
+        <addForeignKeyConstraint baseColumnNames="line_id" baseTableName="attendance_summary"
+                                 constraintName="FKbm6utswfm4jd2elim8q4ovniw" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="line"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-26">
+        <addForeignKeyConstraint baseColumnNames="designation_id" baseTableName="attendance_summary"
+                                 constraintName="FKfn7ewh0u1cyjo2vpfcw4dud5l" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id"
+                                 referencedTableName="mst_designation" validate="true"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-27">
+        <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="attendance_summary"
+                                 constraintName="FKh7uirdh7q4g0s8o7oquj5kohi" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id"
+                                 referencedTableName="mst_department" validate="true"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-28">
+        <addForeignKeyConstraint baseColumnNames="attendance_data_upload_id" baseTableName="attendance"
+                                 constraintName="FKis7kr40jnl2kgqqxoqs5pg2bf" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id"
+                                 referencedTableName="attendance_data_upload" validate="true"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-29">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="fk_leave_application_employee_id"/>
+        </preConditions>
+        <dropForeignKeyConstraint baseTableName="leave_application" constraintName="fk_leave_application_employee_id"/>
+        <addForeignKeyConstraint baseColumnNames="employee_id" baseTableName="leave_application"
+                                 constraintName="FKnck9qx98wjtdslycewtongse1" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="mst_employee"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-30">
+        <addForeignKeyConstraint baseColumnNames="employee_id" baseTableName="attendance_summary"
+                                 constraintName="FKok3u4q0jl3mq715nva4y6wyp6" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="mst_employee"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-31">
+        <addForeignKeyConstraint baseColumnNames="leave_type_id" baseTableName="leave_balance"
+                                 constraintName="FKr7fmdsbyl1l02pt10gdvgkkrq" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="leave_type"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-32">
+        <addForeignKeyConstraint baseColumnNames="employee_salary_id" baseTableName="attendance_summary"
+                                 constraintName="FKt6ao59rax5iddq730d97lnntf" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id"
+                                 referencedTableName="employee_salary" validate="true"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-33">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="fk_attendance_department_id"/>
+        </preConditions>
+        <dropForeignKeyConstraint baseTableName="attendance" constraintName="fk_attendance_department_id"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-34">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="fk_attendance_designation_id"/>
+        </preConditions>
+        <dropForeignKeyConstraint baseTableName="attendance" constraintName="fk_attendance_designation_id"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-35">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="fk_attendance_employee_id"/>
+        </preConditions>
+        <dropForeignKeyConstraint baseTableName="attendance" constraintName="fk_attendance_employee_id"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-36">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="fk_attendance_employee_salary_id"/>
+        </preConditions>
+        <dropForeignKeyConstraint baseTableName="attendance" constraintName="fk_attendance_employee_salary_id"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-37">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="fk_attendance_grade_id"/>
+        </preConditions>
+        <dropForeignKeyConstraint baseTableName="attendance" constraintName="fk_attendance_grade_id"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-38">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="fk_attendance_line_id"/>
+        </preConditions>
+        <dropForeignKeyConstraint baseTableName="attendance" constraintName="fk_attendance_line_id"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-39">
+        <dropForeignKeyConstraint baseTableName="leave_application"
+                                  constraintName="fk_leave_application_action_taken_by_id"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-40">
+        <dropForeignKeyConstraint baseTableName="leave_application" constraintName="fk_leave_application_applicant_id"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-41">
+        <dropForeignKeyConstraint baseTableName="leave_application"
+                                  constraintName="fk_leave_application_applied_by_id"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-42">
+        <dropForeignKeyConstraint baseTableName="leave_application"
+                                  constraintName="fk_leave_application_leave_type_id"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-44">
+        <dropColumn columnName="action_taken_by_id" tableName="leave_application"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-45">
+        <dropColumn columnName="applicant_id" tableName="leave_application"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-46">
+        <dropColumn columnName="applied_by_id" tableName="leave_application"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-47">
+        <dropColumn columnName="attendance_time" tableName="attendance"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-48">
+        <dropColumn columnName="department_id" tableName="attendance"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-49">
+        <dropColumn columnName="designation_id" tableName="attendance"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-50">
+        <dropColumn columnName="employee_category" tableName="attendance"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-51">
+        <dropColumn columnName="employee_id" tableName="attendance"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-52">
+        <dropColumn columnName="employee_salary_id" tableName="attendance"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-53">
+        <dropColumn columnName="employee_type" tableName="attendance"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-54">
+        <dropColumn columnName="grade_id" tableName="attendance"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-55">
+        <dropColumn columnName="leave_applied" tableName="attendance"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-56">
+        <dropColumn columnName="leave_type_id" tableName="leave_application"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-57">
+        <dropColumn columnName="line_id" tableName="attendance"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-58">
+        <dropColumn columnName="marked_as" tableName="attendance"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-1">
+        <addNotNullConstraint columnDataType="varchar(255)" columnName="employee_machine_id" tableName="attendance"
+                              validate="true"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628874815794-2">
+        <dropNotNullConstraint columnDataType="clob" columnName="reason" tableName="leave_application"/>
+    </changeSet>
+
+    <changeSet author="kawsu (generated)" id="1628928072927-1">
+        <addColumn tableName="leave_application">
+            <column name="leave_type_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1628928072927-2">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="leave_type_id"/>
+        </preConditions>
+        <dropForeignKeyConstraint baseTableName="leave_application" constraintName="leave_type_id"/>
+        <addForeignKeyConstraint baseColumnNames="leave_type_id" baseTableName="leave_application"
+                                 constraintName="FKfrg7tqa7y2e4vcxuaqg18jxoa" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="leave_type"
+                                 validate="true"/>
+    </changeSet>
+</databaseChangeLog>

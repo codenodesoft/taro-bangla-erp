@@ -1,0 +1,86 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="leaveBalance">
+            <h2><span>Leave Balance</span> {{ leaveBalance.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Total Days</span></dt>
+                <dd>
+                    <span>{{ leaveBalance.totalDays }}</span>
+                </dd>
+                <dt><span>Remaining Days</span></dt>
+                <dd>
+                    <span>{{ leaveBalance.remainingDays }}</span>
+                </dd>
+                <dt><span>From</span></dt>
+                <dd>
+                    <span>{{ leaveBalance.from }}</span>
+                </dd>
+                <dt><span>To</span></dt>
+                <dd>
+                    <span>{{ leaveBalance.to }}</span>
+                </dd>
+                <dt><span>Remarks</span></dt>
+                <dd>
+                    <span>{{ leaveBalance.remarks }}</span>
+                </dd>
+                <dt><span>Last Synchronized On</span></dt>
+                <dd>
+                    <span>{{ leaveBalance.lastSynchronizedOn }}</span>
+                </dd>
+                <dt><span>Status</span></dt>
+                <dd>
+                    <span>{{ leaveBalance.status }}</span>
+                </dd>
+                <dt><span>Assessment Year</span></dt>
+                <dd>
+                    <span>{{ leaveBalance.assessmentYear }}</span>
+                </dd>
+                <dt><span>Amount</span></dt>
+                <dd>
+                    <span>{{ leaveBalance.amount }}</span>
+                </dd>
+                <dt><span>Employee</span></dt>
+                <dd>
+                    <div *ngIf="leaveBalance.employee">
+                        <a [routerLink]="['/employee', leaveBalance.employee?.id, 'view']">{{ leaveBalance.employee?.name }}</a>
+                    </div>
+                </dd>
+                <dt><span>Leave Type</span></dt>
+                <dd>
+                    <div *ngIf="leaveBalance.leaveType">
+                        <a [routerLink]="['/leave-type', leaveBalance.leaveType?.id, 'view']">{{ leaveBalance.leaveType?.name }}</a>
+                    </div>
+                </dd>
+                <dt><span>Department</span></dt>
+                <dd>
+                    <div *ngIf="leaveBalance.department">
+                        <a [routerLink]="['/department', leaveBalance.department?.id, 'view']">{{ leaveBalance.department?.name }}</a>
+                    </div>
+                </dd>
+                <dt><span>Designation</span></dt>
+                <dd>
+                    <div *ngIf="leaveBalance.designation">
+                        <a [routerLink]="['/designation', leaveBalance.designation?.id, 'view']">{{ leaveBalance.designation?.name }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/leave-balance', leaveBalance.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

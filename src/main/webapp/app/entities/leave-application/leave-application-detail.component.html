@@ -1,0 +1,93 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="leaveApplication">
+            <h2><span>Leave Application</span> {{ leaveApplication.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>From</span></dt>
+                <dd>
+                    <span>{{ leaveApplication.from }}</span>
+                </dd>
+                <dt><span>To</span></dt>
+                <dd>
+                    <span>{{ leaveApplication.to }}</span>
+                </dd>
+                <dt><span>Total Days</span></dt>
+                <dd>
+                    <span>{{ leaveApplication.totalDays }}</span>
+                </dd>
+                <dt><span>Reason</span></dt>
+                <dd>
+                    <span>{{ leaveApplication.reason }}</span>
+                </dd>
+                <dt><span>Attachment</span></dt>
+                <dd>
+                    <div *ngIf="leaveApplication.attachment">
+                        <a (click)="openFile(leaveApplication.attachmentContentType, leaveApplication.attachment)">open</a>
+                        {{ leaveApplication.attachmentContentType }}, {{ byteSize(leaveApplication.attachment) }}
+                    </div>
+                </dd>
+                <dt><span>Status</span></dt>
+                <dd>
+                    <span>{{ leaveApplication.status }}</span>
+                </dd>
+                <dt><span>Applied By</span></dt>
+                <dd>
+                    <span>{{ leaveApplication.appliedBy }}</span>
+                </dd>
+                <dt><span>Applied On</span></dt>
+                <dd>
+                    <span>{{ leaveApplication.appliedOn }}</span>
+                </dd>
+                <dt><span>Action Taken By</span></dt>
+                <dd>
+                    <span>{{ leaveApplication.actionTakenBy }}</span>
+                </dd>
+                <dt><span>Action Taken On</span></dt>
+                <dd>
+                    <span>{{ leaveApplication.actionTakenOn }}</span>
+                </dd>
+                <dt><span>Employee</span></dt>
+                <dd>
+                    <div *ngIf="leaveApplication.employee">
+                        <a [routerLink]="['/employee', leaveApplication.employee?.id, 'view']">{{ leaveApplication.employee?.name }}</a>
+                    </div>
+                </dd>
+                <dt><span>Leave Type</span></dt>
+                <dd>
+                    <div *ngIf="leaveApplication.leaveType">
+                        <a [routerLink]="['/leave-type', leaveApplication.leaveType?.id, 'view']">{{ leaveApplication.leaveType?.name }}</a>
+                    </div>
+                </dd>
+                <dt><span>Department</span></dt>
+                <dd>
+                    <div *ngIf="leaveApplication.department">
+                        <a [routerLink]="['/department', leaveApplication.department?.id, 'view']">{{ leaveApplication.department?.name }}</a>
+                    </div>
+                </dd>
+                <dt><span>Designation</span></dt>
+                <dd>
+                    <div *ngIf="leaveApplication.designation">
+                        <a [routerLink]="['/designation', leaveApplication.designation?.id, 'view']">{{ leaveApplication.designation?.name }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/leave-application', leaveApplication.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

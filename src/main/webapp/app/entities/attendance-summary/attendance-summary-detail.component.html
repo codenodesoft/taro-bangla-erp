@@ -1,0 +1,98 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="attendanceSummary">
+            <h2><span>Attendance Summary</span> {{ attendanceSummary.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>In Time</span></dt>
+                <dd>
+                    <span>{{ attendanceSummary.inTime | date:'medium'  }}</span>
+                </dd>
+                <dt><span>Out Time</span></dt>
+                <dd>
+                    <span>{{ attendanceSummary.outTime | date:'medium' }}</span>
+                </dd>
+                <dt><span>Total Hours</span></dt>
+                <dd>
+                    <span>{{ attendanceSummary.totalHours }}</span>
+                </dd>
+                <dt><span>Working Hours</span></dt>
+                <dd>
+                    <span>{{ attendanceSummary.workingHours }}</span>
+                </dd>
+                <dt><span>Overtime</span></dt>
+                <dd>
+                    <span>{{ attendanceSummary.overtime }}</span>
+                </dd>
+                <dt><span>Attendance Type</span></dt>
+                <dd>
+                    <span>{{ attendanceSummary.attendanceType }}</span>
+                </dd>
+                <dt><span>Attendance Status</span></dt>
+                <dd>
+                    <span>{{ attendanceSummary.attendanceStatus }}</span>
+                </dd>
+                <dt><span>Remarks</span></dt>
+                <dd>
+                    <span>{{ attendanceSummary.remarks }}</span>
+                </dd>
+                <dt><span>Attendance Date</span></dt>
+                <dd>
+                    <span>{{ attendanceSummary.attendanceDate | date:'mediumDate' }}</span>
+                </dd>
+                <dt><span>Employee</span></dt>
+                <dd>
+                    <div *ngIf="attendanceSummary.employee">
+                        <a [routerLink]="['/employee', attendanceSummary.employee?.id, 'view']">{{ attendanceSummary.employee?.attendanceMachineId }}</a>
+                    </div>
+                </dd>
+                <dt><span>Employee Salary</span></dt>
+                <dd>
+                    <div *ngIf="attendanceSummary.employeeSalary">
+                        <a [routerLink]="['/employee-salary', attendanceSummary.employeeSalary?.id, 'view']">{{ attendanceSummary.employeeSalary?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Department</span></dt>
+                <dd>
+                    <div *ngIf="attendanceSummary.department">
+                        <a [routerLink]="['/department', attendanceSummary.department?.id, 'view']">{{ attendanceSummary.department?.name }}</a>
+                    </div>
+                </dd>
+                <dt><span>Designation</span></dt>
+                <dd>
+                    <div *ngIf="attendanceSummary.designation">
+                        <a [routerLink]="['/designation', attendanceSummary.designation?.id, 'view']">{{ attendanceSummary.designation?.name }}</a>
+                    </div>
+                </dd>
+                <dt><span>Line</span></dt>
+                <dd>
+                    <div *ngIf="attendanceSummary.line">
+                        <a [routerLink]="['/line', attendanceSummary.line?.id, 'view']">{{ attendanceSummary.line?.name }}</a>
+                    </div>
+                </dd>
+                <dt><span>Grade</span></dt>
+                <dd>
+                    <div *ngIf="attendanceSummary.grade">
+                        <a [routerLink]="['/grade', attendanceSummary.grade?.id, 'view']">{{ attendanceSummary.grade?.name }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/attendance-summary', attendanceSummary.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

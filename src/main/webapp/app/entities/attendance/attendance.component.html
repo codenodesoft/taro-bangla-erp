@@ -1,0 +1,112 @@
+<div>
+    <h2 id="page-heading">
+        <span>Attendances</span>
+
+        <!--<button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-attendance" [routerLink]="['/attendance/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Attendance
+            </span>
+        </button>-->
+
+        <button id="jh-bulk-create-entity"
+                class="btn btn-primary float-right jh-create-entity create-attendance-data-upload"
+                [routerLink]="['/attendance-data-upload/new']">
+            <fa-icon icon="upload"></fa-icon>
+            <span>
+            Data Upload
+            </span>
+        </button>
+    </h2>
+
+    <form>
+        <h4>Filter by date & time</h4>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">From</span>
+            </div>
+            <input type="datetime-local" class="form-control" name="start" [(ngModel)]="fromDateTime"
+                   required/>
+
+            <div class="input-group-append">
+                <span class="input-group-text">To</span>
+            </div>
+            <input type="datetime-local" class="form-control" name="end" [(ngModel)]="toDateTime"
+                   required/>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Employee Machine Id</span>
+            </div>
+            <input type="text" class="form-control" name="empId" [(ngModel)]="employeeMachineId"/>
+
+            <button type="submit" class="btn btn-info" (click)="loadPage()">
+                <fa-icon icon="search"></fa-icon>
+            </button>
+
+        </div>
+    </form>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="attendances?.length === 0">
+        <span>No attendances found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="attendances && attendances.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="machineNo"><span>Machine No</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="employeeMachineId"><span>Employee Machine Id</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="attendanceDateTime"><span>Attendance Date Time</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let attendance of attendances ;trackBy: trackId">
+                    <td><a [routerLink]="['/attendance', attendance.id, 'view']">{{ attendance.id }}</a></td>
+                    <td>{{ attendance.machineNo }}</td>
+                    <td>{{ attendance.employeeMachineId }}</td>
+                    <td>{{ attendance.attendanceDateTime | date:'medium'}}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/attendance', attendance.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <!--<button type="submit"
+                                    [routerLink]="['/attendance', attendance.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(attendance)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>-->
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="attendances && attendances.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,170 @@
+<div>
+    <h2 id="page-heading">
+        <span>Leave Balances</span>
+
+        <!--<button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-leave-balance" [routerLink]="['/leave-balance/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Leave Balance
+            </span>
+        </button>-->
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <form>
+        <h4>Filter by Employee & Year</h4>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Year</span>
+            </div>
+            <select class="form-control" name="year"
+                    [(ngModel)]="year" required>
+                <option [ngValue]="yearOption.id"
+                        *ngFor="let yearOption of years;">{{ yearOption.name }}</option>
+            </select>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Department</span>
+            </div>
+            <select class="form-control" name="department"
+                    [(ngModel)]="department">
+                <option [ngValue]="departmentOption"
+                        *ngFor="let departmentOption of departments;">{{ departmentOption.name }}</option>
+            </select>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Designation</span>
+            </div>
+            <select class="form-control" name="designation"
+                    [(ngModel)]="designation">
+                <option [ngValue]="designationOption"
+                        *ngFor="let designationOption of designations;">{{ designationOption.name }}</option>
+            </select>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Emp Id</span>
+            </div>
+            <input type="text" class="form-control" name="empId" [(ngModel)]="empId"/>
+
+            <button type="submit" class="btn btn-info" (click)="loadPage()">
+                <fa-icon icon="search"></fa-icon>
+            </button>
+
+        </div>
+    </form>
+
+    <div class="input-group mb-3">
+        <button type="button" class="btn btn-info" (click)="download()">
+            <fa-icon icon="download"></fa-icon>
+        </button>
+    </div>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="leaveBalances?.length === 0">
+        <span>No leaveBalances found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="leaveBalances && leaveBalances.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                <th scope="col" jhiSortBy="id"><span>ID</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="employee.name"><span>Employee</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="department.name"><span>Department</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="designation.name"><span>Designation</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="leaveType.name"><span>Leave Type</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="from"><span>From</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="to"><span>To</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="totalDays"><span>Total Days</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="remainingDays"><span>Remaining Days</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let leaveBalance of leaveBalances ;trackBy: trackId">
+                <td><a [routerLink]="['/leave-balance', leaveBalance.id, 'view']">{{ leaveBalance.id }}</a></td>
+                <td>
+                    <div *ngIf="leaveBalance.employee">
+                        <a [routerLink]="['/employee', leaveBalance.employee?.id, 'view']">{{ leaveBalance.employee?.name }}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="leaveBalance.department">
+                        <a [routerLink]="['/department', leaveBalance.department?.id, 'view']">{{ leaveBalance.department?.name }}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="leaveBalance.designation">
+                        <a [routerLink]="['/designation', leaveBalance.designation?.id, 'view']">{{ leaveBalance.designation?.name }}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="leaveBalance.leaveType">
+                        <a [routerLink]="['/leave-type', leaveBalance.leaveType?.id, 'view']">{{ leaveBalance.leaveType?.name }}</a>
+                    </div>
+                </td>
+                <td>{{ leaveBalance.from | date:'mediumDate' }}</td>
+                <td>{{ leaveBalance.to | date:'mediumDate' }}</td>
+                <td>{{ leaveBalance.totalDays }}</td>
+                <td>{{ leaveBalance.remainingDays }}</td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/leave-balance', leaveBalance.id, 'view']"
+                                class="btn btn-info btn-sm">
+                            <fa-icon icon="eye"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+
+                        <button type="submit"
+                                [routerLink]="['/leave-balance', leaveBalance.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon icon="pencil-alt"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+
+                        <!--<button type="submit" (click)="delete(leaveBalance)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon icon="times"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>-->
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="leaveBalances && leaveBalances.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage"
+                            [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                            (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

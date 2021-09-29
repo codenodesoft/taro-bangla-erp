@@ -1,0 +1,37 @@
+{
+  "name": "EmployeeLeaveDate",
+  "fields": [
+    {
+      "fieldName": "leaveDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "employeeLeaveDate",
+      "relationshipName": "employee",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "scheduledEmployeeLeaveApplication",
+      "otherEntityRelationshipName": "employeeLeaveDate",
+      "relationshipName": "scheduledLeaveApplication",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20210814144637",
+  "entityTableName": "employee_leave_date",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "skipClient": true
+}

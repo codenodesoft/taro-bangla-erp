@@ -1,0 +1,276 @@
+<style>
+    .specialAllowance{
+        background-color: white;
+    }
+</style>
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <div class="alert alert-warning" role="alert">
+            If medical allowance, convince and food allowance is not provided, then <b>default allowance</b> will be considered in salary generation.
+        </div>
+
+    </div>
+    <div class="col-md-12">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-employee-salary-heading">{{!editForm.get('id')!.value? "Add New": "Update"}} Salary Structure</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="row justify-content-center">
+
+
+                <div class="form-group col-md-12">
+                    <label class="form-control-label" for="field_gross">Gross</label>
+                    <input type="number" class="form-control" (ngModelChange)="extractGross()" name="gross" id="field_gross"
+                           formControlName="gross"/>
+                    <div *ngIf="editForm.get('gross')!.invalid && (editForm.get('gross')!.dirty || editForm.get('gross')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('gross')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('gross')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="form-control-label" for="field_incrementAmount">Increment Amount</label>
+                    <input type="number" class="form-control" name="incrementAmount" id="field_incrementAmount"
+                           formControlName="incrementAmount"/>
+                    <div *ngIf="editForm.get('incrementAmount')!.invalid && (editForm.get('incrementAmount')!.dirty || editForm.get('incrementAmount')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('incrementAmount')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('incrementAmount')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="form-control-label" for="field_incrementPercentage">Increment Percentage</label>
+                    <input type="number" class="form-control" name="incrementPercentage" id="field_incrementPercentage"
+                           formControlName="incrementPercentage"/>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="form-control-label" for="field_salaryStartDate">Salary Start Date</label>
+                    <div class="d-flex">
+                        <input id="field_salaryStartDate" type="datetime-local" class="form-control" name="salaryStartDate" formControlName="salaryStartDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('salaryStartDate')!.invalid && (editForm.get('salaryStartDate')!.dirty || editForm.get('salaryStartDate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('salaryStartDate')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('salaryStartDate')?.errors?.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="form-control-label" for="field_salaryEndDate">Salary End Date</label>
+                    <div class="d-flex">
+                        <input id="field_salaryEndDate" type="datetime-local" class="form-control" name="salaryEndDate" formControlName="salaryEndDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('salaryEndDate')!.invalid && (editForm.get('salaryEndDate')!.dirty || editForm.get('salaryEndDate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('salaryEndDate')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('salaryEndDate')?.errors?.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label class="form-control-label" for="field_nextIncrementDate">Next Increment Date</label>
+                    <div class="d-flex">
+                        <input id="field_nextIncrementDate" type="datetime-local" class="form-control" name="nextIncrementDate" formControlName="nextIncrementDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="form-control-label" for="field_basic">Basic</label>
+                    <input type="number" class="form-control" name="basic" id="field_basic"
+                           formControlName="basic"/>
+                    <div *ngIf="editForm.get('basic')!.invalid && (editForm.get('basic')!.dirty || editForm.get('basic')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('basic')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('basic')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" for="field_basicPercent">Basic Percent</label>
+                        <input type="number" class="form-control" name="basicPercent" id="field_basicPercent"
+                               formControlName="basicPercent"/>
+                    </div>
+
+                <div class="form-group col-md-6">
+                    <label class="form-control-label" for="field_houseRent">House Rent</label>
+                    <input type="number" class="form-control" name="houseRent" id="field_houseRent"
+                           formControlName="houseRent"/>
+                    <div *ngIf="editForm.get('houseRent')!.invalid && (editForm.get('houseRent')!.dirty || editForm.get('houseRent')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('houseRent')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('houseRent')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" for="field_houseRentPercent">House Rent Percent</label>
+                        <input type="number" class="form-control" name="houseRentPercent" id="field_houseRentPercent"
+                               formControlName="houseRentPercent"/>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label class="form-control-label" for="field_totalAllowance">Total Allowance</label>
+                        <input type="number" class="form-control" name="totalAllowance" id="field_totalAllowance"
+                               formControlName="totalAllowance"/>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" for="field_medicalAllowance">Medical Allowance</label>
+                        <input type="number" class="form-control" (ngModelChange)="extractGross()" name="medicalAllowance" id="field_medicalAllowance"
+                               formControlName="medicalAllowance"/>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" for="field_medicalAllowancePercent">Medical Allowance Percent</label>
+                        <input type="number" class="form-control"  name="medicalAllowancePercent" id="field_medicalAllowancePercent"
+                               formControlName="medicalAllowancePercent"/>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" for="field_convinceAllowance">Convince Allowance</label>
+                        <input type="number" class="form-control" (ngModelChange)="extractGross()" name="convinceAllowance" id="field_convinceAllowance"
+                               formControlName="convinceAllowance"/>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" for="field_convinceAllowancePercent">Convince Allowance Percent</label>
+                        <input type="number" class="form-control" name="convinceAllowancePercent" id="field_convinceAllowancePercent"
+                               formControlName="convinceAllowancePercent"/>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" for="field_foodAllowance">Food Allowance</label>
+                        <input type="number" class="form-control" (ngModelChange)="extractGross()" name="foodAllowance" id="field_foodAllowance"
+                               formControlName="foodAllowance"/>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label" for="field_foodAllowancePercent">Food Allowance Percent</label>
+                        <input type="number" class="form-control" name="foodAllowancePercent" id="field_foodAllowancePercent"
+                               formControlName="foodAllowancePercent"/>
+                    </div>
+
+                <div class="form-group col-md-12">
+                    <label class="form-control-label" for="field_specialAllowanceActiveStatus">Special Allowance Active Status</label>
+                    <select class="form-control" name="specialAllowanceActiveStatus" formControlName="specialAllowanceActiveStatus" id="field_specialAllowanceActiveStatus">
+                        <option value="ACTIVE">ACTIVE</option>
+                        <option value="NOT_ACTIVE">NOT_ACTIVE</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6" *ngIf="editForm.controls['specialAllowanceActiveStatus'].value === 'ACTIVE'">
+                    <label class="form-control-label" for="field_specialAllowance">Special Allowance</label>
+                    <input type="number" class="form-control" name="specialAllowance" id="field_specialAllowance"
+                           formControlName="specialAllowance"/>
+                </div>
+
+                <div class="form-group col-md-6" *ngIf="editForm.controls['specialAllowanceActiveStatus'].value === 'ACTIVE'">
+                    <label class="form-control-label" for="field_specialAllowancePercent">Special Allowance Percent</label>
+                    <input type="number" class="form-control" name="specialAllowancePercent" id="field_specialAllowancePercent"
+                           formControlName="specialAllowancePercent"/>
+                </div>
+
+                <div class="form-group col-md-12" *ngIf="editForm.controls['specialAllowanceActiveStatus'].value === 'ACTIVE'">
+                    <label class="form-control-label" for="field_specialAllowanceDescription">Special Allowance Description</label>
+                    <textarea class="form-control" name="specialAllowanceDescription" id="field_specialAllowanceDescription"
+                              formControlName="specialAllowanceDescription"></textarea>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label class="form-control-label" for="field_insuranceActiveStatus">Insurance Active Status</label>
+                    <select class="form-control" name="insuranceActiveStatus" formControlName="insuranceActiveStatus" id="field_insuranceActiveStatus">
+                        <option value="ACTIVE">ACTIVE</option>
+                        <option value="NOT_ACTIVE">NOT_ACTIVE</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6" *ngIf="editForm.controls['insuranceActiveStatus'].value === 'ACTIVE'">
+                    <label class="form-control-label" for="field_insuranceAmount">Insurance Amount</label>
+                    <input type="number" class="form-control" name="insuranceAmount" id="field_insuranceAmount"
+                           formControlName="insuranceAmount"/>
+                </div>
+
+                <div class="form-group col-md-6" *ngIf="editForm.controls['insuranceActiveStatus'].value === 'ACTIVE'">
+                    <label class="form-control-label" for="field_insurancePercent">Insurance Percent</label>
+                    <input type="number" class="form-control" name="insurancePercent" id="field_insurancePercent"
+                           formControlName="insurancePercent"/>
+                </div>
+
+                <div class="form-group col-md-12" *ngIf="editForm.controls['insuranceActiveStatus'].value === 'ACTIVE'">
+                    <label class="form-control-label" for="field_insuranceDescription">Insurance Description</label>
+                    <textarea class="form-control" name="insuranceDescription" id="field_insuranceDescription"
+                              formControlName="insuranceDescription"></textarea>
+                </div>
+
+                <div class="form-group col-md-12" *ngIf="editForm.controls['insuranceActiveStatus'].value === 'ACTIVE'">
+                    <label class="form-control-label" for="field_insuranceProcessType">Insurance Process Type</label>
+                    <select class="form-control" name="insuranceProcessType" formControlName="insuranceProcessType" id="field_insuranceProcessType">
+                        <option value="PROCESS_WITH_SALARY">PROCESS_WITH_SALARY</option>
+                        <option value="PROCESS_SEPARATELY">PROCESS_SEPARATELY</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label class="form-control-label" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="ACTIVE">ACTIVE</option>
+                        <option value="NOT_ACTIVE">NOT_ACTIVE</option>
+                    </select>
+                    <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('status')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+            </div>
+        </form>
+    </div>
+</div>

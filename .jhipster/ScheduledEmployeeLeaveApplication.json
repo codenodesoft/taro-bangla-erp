@@ -1,0 +1,33 @@
+{
+  "name": "ScheduledEmployeeLeaveApplication",
+  "fields": [
+    {
+      "fieldName": "leaveApplicationId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "executedOn",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "employeeLeaveDate",
+      "otherEntityRelationshipName": "scheduledLeaveApplication",
+      "relationshipName": "employeeLeaveDate"
+    }
+  ],
+  "changelogDate": "20210814151532",
+  "entityTableName": "sch_emp_leave_app",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "skipClient": true
+}

@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+    <div class="col-md-12" *ngIf="employee">
+        <div class="row">
+            <div class="col-md-1">
+                <fa-icon (click)="previousState()" style="cursor: pointer;" icon="angle-double-left" size="2x" title="Back to list" ></fa-icon>
+            </div>
+            <div class="col-md-11">
+                <p>Name: <b>{{employee.name}}</b>, Department: <b>{{employee.department?.name}}</b>, Designation: <b>{{employee.designation?.name}}</b>, Category: <b>{{employee.category}}</b></p>
+            </div>
+        </div>
+        <hr/>
+    </div>
+
+    <div class="col-md-10">
+        <router-outlet ></router-outlet>
+    </div>
+
+    <div class="col-md-2 " style="height: 100%; display:flex; justify-items: center;">
+        <div class="row">
+            <div style="padding:10px;" class="col-md-12" *ngIf="!user"><button routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" style="width: 100%;" class="btn  btn-outline-info" [routerLink]="['/admin/user-management/new']" [queryParams]="{employeeId: employeeId}" >{{user?'Edit User Account': 'Create user Account'}}</button></div>
+            <div style="padding:10px;" class="col-md-12" *ngIf="user"><button routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" style="width: 100%;" class="btn  btn-outline-info" [routerLink]="['/admin/user-management', user.login,'edit']" >{{user?'Edit User Account': 'Create user Account'}}</button></div>
+            <div style="padding:10px;" class="col-md-12"><button routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" style="width: 100%;" class="btn  btn-outline-info" [routerLink]="employee?.personalInfo ? ['personal-info',employee!.personalInfo!.id,'view' ]: ['personal-info',employeeId,'employee-view']">Personal Info</button></div>
+            <div style="padding:10px;" class="col-md-12"><button routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" style="width: 100%;" class="btn  btn-outline-info" [routerLink]="employee?.address? ['address', employee!.address!.id,'view']: ['address',employeeId,'employee-view']">Address</button></div>
+            <div style="padding:10px;" class="col-md-12"><button routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" style="width: 100%;" class="btn  btn-outline-info" [routerLink]="['educational-info']" [queryParams]="{employeeId: employeeId}">Education</button></div>
+            <div style="padding:10px;" class="col-md-12"><button routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" style="width: 100%;" class="btn  btn-outline-info" [routerLink]="['job-history']" [queryParams]="{employeeId: employeeId }">Job History</button></div>
+            <div style="padding:10px;" class="col-md-12"><button routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" style="width: 100%;" class="btn  btn-outline-info" [routerLink]="['training']" [queryParams]="{employeeId: employeeId}">Training</button></div>
+            <div style="padding:10px;" class="col-md-12"><button routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" style="width: 100%;" class="btn  btn-outline-info" [routerLink]="['service-history']" [queryParams]="{employeeId: employeeId}">Service History</button></div>
+            <div style="padding:10px;" class="col-md-12"><button routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" style="width: 100%;" class="btn  btn-outline-info" [routerLink]="['id-card-management',employeeId]"  >ID Card Management</button></div>
+            <div style="padding:10px;" class="col-md-12"><button routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" style="width: 100%;" class="btn  btn-outline-info" [routerLink]="['employee-salary']" [queryParams]="{employeeId: employeeId}" >Salary</button></div>
+            <div style="padding:10px;" class="col-md-12"><button routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" style="width: 100%;" class="btn  btn-outline-info" [routerLink]="['advance']" [queryParams]="{employeeId: employeeId}" >Advance</button></div>
+            <div style="padding:10px;" class="col-md-12"><button routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" style="width: 100%;" class="btn  btn-outline-info" [routerLink]="['fine']" [queryParams]="{employeeId: employeeId}" >Fine</button></div>
+
+        </div>
+
+    </div>1
+</div>

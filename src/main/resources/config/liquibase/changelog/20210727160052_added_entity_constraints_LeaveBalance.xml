@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity LeaveBalance.
+    -->
+    <changeSet id="20210727160052-2" author="jhipster">
+        <validCheckSum>8:dde56491e46ad27a4fa3a0b3e0101322</validCheckSum>
+        <addForeignKeyConstraint baseColumnNames="employee_id"
+                                 baseTableName="leave_balance"
+                                 constraintName="fk_leave_balance_employee_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="mst_employee"/>
+
+        <addForeignKeyConstraint baseColumnNames="leave_type_id"
+                                 baseTableName="leave_balance"
+                                 constraintName="fk_leave_balance_leave_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="leave_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="department_id"
+                                 baseTableName="leave_balance"
+                                 constraintName="fk_leave_balance_department_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="mst_department"/>
+
+        <addForeignKeyConstraint baseColumnNames="designation_id"
+                                 baseTableName="leave_balance"
+                                 constraintName="fk_leave_balance_designation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="mst_designation"/>
+
+    </changeSet>
+</databaseChangeLog>

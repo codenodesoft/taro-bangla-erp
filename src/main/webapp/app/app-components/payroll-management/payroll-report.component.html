@@ -1,0 +1,48 @@
+<div class="row d-flex align-content-center align-items-center">
+    <div class="col-md-12">
+        <jhi-alert></jhi-alert>
+        <jhi-alert-error></jhi-alert-error>
+    </div>
+    <div class="col-md-12 alert alert-warning">
+        OverTime must be generated if no over-time calculation is found.
+    </div>
+    <div class="form-group col-md-2">
+        <label class="form-control-label" for="field_year">Year</label>
+        <select class="form-control" id="field_year" name="year" [(ngModel)]="selectedYear">
+            <option [value]="yearOption"  *ngFor="let yearOption of years">{{yearOption}}</option>
+        </select>
+    </div>
+    <div class="form-group col-md-2">
+        <label class="form-control-label" for="field_month">Month</label>
+        <select class="form-control" name="month"  id="field_month" [(ngModel)]="selectedMonth">
+            <option value="undefined">Select Month</option>
+            <option value="JANUARY">JANUARY</option>
+            <option value="FEBRUARY">FEBRUARY</option>
+            <option value="MARCH">MARCH</option>
+            <option value="APRIL">APRIL</option>
+            <option value="MAY">MAY</option>
+            <option value="JUNE">JUNE</option>
+            <option value="JULY">JULY</option>
+            <option value="AUGUST">AUGUST</option>
+            <option value="SEPTEMBER">SEPTEMBER</option>
+            <option value="OCTOBER">OCTOBER</option>
+            <option value="NOVEMBER">NOVEMBER</option>
+            <option value="DECEMBER">DECEMBER</option>
+        </select>
+    </div>
+
+    <div class="form-group col-md-2">
+        <label class="form-control-label" for="field_department">Departments</label>
+        <select class="form-control" id="field_department" name="department" [(ngModel)]="selectedDepartmentId" >
+            <option [ngValue]="undefined">Select Department</option>
+            <option [ngValue]="departmentOption.id" *ngFor="let departmentOption of departments">{{departmentOption.name}}</option>
+        </select>
+    </div>
+
+
+    <div class="form-group col-md-12">
+        <button class="btn btn-primary" (click)="downloadReport('WITH_FULL_CALCULATION')">Generate Excel Reports <br/>(With Total OverTime)</button>
+        <button class="btn btn-secondary" (click)="downloadReport('WITH_GOVT_CALCULATION')">Generate Excel Reports <br/>(With Govt. OverTime)</button>
+        <button class="btn btn-success" (click)="downloadReport('WITH_EXTRA_CALCULATION')">Generate Excel Reports <br/>(With Extra OverTime)</button>
+    </div>
+</div>

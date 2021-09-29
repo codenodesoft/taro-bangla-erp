@@ -1,0 +1,40 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="monju (generated)" id="1628959572076-3">
+        <createTable tableName="employee_leave_date">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="employee_leave_datePK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime(6)"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="datetime(6)"/>
+            <column name="leave_date" type="date"/>
+            <column name="employee_id" type="BIGINT"/>
+            <column name="scheduled_leave_application_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="monju (generated)" id="1628959572076-4">
+        <createTable tableName="sch_emp_leave_app">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="sch_emp_leave_appPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime(6)"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="datetime(6)"/>
+            <column name="executed_on" type="datetime(6)"/>
+            <column name="leave_application_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="monju (generated)" id="1628959572076-5">
+        <addForeignKeyConstraint baseColumnNames="scheduled_leave_application_id" baseTableName="employee_leave_date" constraintName="FKchbmj6rir269n0lj0h45vwuni" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="sch_emp_leave_app" validate="true"/>
+    </changeSet>
+    <changeSet author="monju (generated)" id="1628959572076-6">
+        <addForeignKeyConstraint baseColumnNames="employee_id" baseTableName="employee_leave_date" constraintName="FKsarl463otd74cansvqxgjbqnl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="mst_employee" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

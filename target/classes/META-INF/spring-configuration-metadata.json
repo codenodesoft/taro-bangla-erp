@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "application",
+      "type": "software.cstl.config.ApplicationProperties",
+      "sourceType": "software.cstl.config.ApplicationProperties"
+    },
+    {
+      "name": "spring.datasource.hikari",
+      "type": "javax.sql.DataSource",
+      "sourceType": "software.cstl.config.CloudDatabaseConfiguration",
+      "sourceMethod": "dataSource(org.springframework.cache.CacheManager)"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

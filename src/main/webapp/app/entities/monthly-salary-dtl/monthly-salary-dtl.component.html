@@ -1,0 +1,66 @@
+<div>
+    <h2 id="page-heading">
+        <span>Salary Details</span>
+
+    </h2>
+
+
+    <div class="alert alert-warning" id="no-result" *ngIf="monthlySalaryDtls?.length === 0">
+        <span>No monthlySalaryDtls found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="monthlySalaryDtls && monthlySalaryDtls.length > 0" style="font-size: small;">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>SL</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="employee.name"><span>Employee</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="gross"><span>Gross</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="gross"><span>Net Payment Salary</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="basic"><span>Basic</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fine"><span>Fine</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="advance"><span>Advance</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="status"><span>Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="executedOn"><span>Executed On</span> <fa-icon icon="sort"></fa-icon></th>
+
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let monthlySalaryDtl of monthlySalaryDtls ;trackBy: trackId; index as i">
+                    <td><a [routerLink]="['/monthly-salary-dtl', monthlySalaryDtl.id, 'view']">{{ (page -1) * itemsPerPage + (i+1)}}</a></td>
+                    <td>{{monthlySalaryDtl.employee? monthlySalaryDtl.employee.name+'('+ monthlySalaryDtl.employee.localId+')': ''}}</td>
+                    <td>{{ monthlySalaryDtl.gross }}</td>
+                    <td>{{monthlySalaryDtl.totalPayable}}</td>
+                    <td>{{ monthlySalaryDtl.basic }}</td>
+                    <td>{{ monthlySalaryDtl.fine }}</td>
+                    <td>{{ monthlySalaryDtl.advance }}</td>
+                    <td>{{ monthlySalaryDtl.status }}</td>
+                    <td>{{ monthlySalaryDtl.executedOn | date:'medium' }}</td>
+
+                    <td class="text-right">
+                        <div class="btn-group" >
+                            <button class="btn btn-secondary" (click)="regenerateEmployeeSalaries(monthlySalaryDtl)">
+                                Generate
+                            </button>
+                            <button class="btn btn-primary" *ngIf="monthlySalaryDtl.status==='DONE'" (click)="downloadEmployeeDepositSlip(monthlySalaryDtl.id!)">
+                                Pay-Slip
+                            </button>
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="monthlySalaryDtls && monthlySalaryDtls.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+<div>
+    <h2 id="page-heading">
+        <span>Attendance Summary</span>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <form>
+        <h4>Filter by Date, Department, Designation & Employee Id</h4>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Select Date</span>
+            </div>
+            <input type="date" class="form-control" name="selectedDate" [(ngModel)]="selectedDate"
+                   required/>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Department</span>
+            </div>
+            <select class="form-control" name="department"
+                    [(ngModel)]="department">
+                <option [ngValue]="departmentOption"
+                        *ngFor="let departmentOption of departments;">{{ departmentOption.name }}</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Designation</span>
+            </div>
+            <select class="form-control" name="designation"
+                    [(ngModel)]="designation">
+                <option [ngValue]="designationOption"
+                        *ngFor="let designationOption of designations;">{{ designationOption.name }}</option>
+            </select>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Emp Id</span>
+            </div>
+            <input type="text" class="form-control" name="empId" [(ngModel)]="empId"/>
+
+            <button type="submit" class="btn btn-info" (click)="loadAll()">
+                <fa-icon icon="search"></fa-icon>
+            </button>
+        </div>
+    </form>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="attendanceSummaries?.length === 0">
+        <span>No attendanceSummaries found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="attendanceSummaries && attendanceSummaries.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+                <th scope="col"><span>Employee ID</span></th>
+                <th scope="col"><span>Employee</span></th>
+                <th scope="col"><span>Department</span></th>
+                <th scope="col"><span>Designation</span></th>
+                <th scope="col"><span>In</span></th>
+                <th scope="col"><span>Out</span></th>
+                <th scope="col"><span>Duration</span></th>
+                <th scope="col"><span>OT</span></th>
+                <th scope="col"><span>Type</span></th>
+                <th scope="col"><span>Status</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let attendanceSummary of attendanceSummaries ;trackBy: trackId">
+                <td>
+                    <div *ngIf="attendanceSummary.employee">
+                        <a [routerLink]="['/employee', attendanceSummary.employee?.id, 'view']">{{ attendanceSummary.employee?.empId }}
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="attendanceSummary.employee">
+                        <a [routerLink]="['/employee', attendanceSummary.employee?.id, 'view']">{{ attendanceSummary.employee?.name }}
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="attendanceSummary.department">
+                        <a [routerLink]="['/department', attendanceSummary.department?.id, 'view']">{{ attendanceSummary.department?.name }}
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="attendanceSummary.designation">
+                        <a [routerLink]="['/designation', attendanceSummary.designation?.id, 'view']">{{ attendanceSummary.designation?.name }}
+                        </a>
+                    </div>
+                </td>
+                <td>{{ attendanceSummary.inTime | date:'medium' }}</td>
+                <td>{{ attendanceSummary.outTime | date:'medium' }}</td>
+                <td>{{ attendanceSummary.workingHours }}</td>
+                <td>{{ attendanceSummary.overtime }}</td>
+                <td>{{ attendanceSummary.attendanceType }}</td>
+                <td>{{ attendanceSummary.attendanceStatus }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row" *ngIf="attendanceSummaries && attendanceSummaries.length > 0">
+        <div class="col-6">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Attendance Type</span>
+                </div>
+                <select class="form-control" name="attendanceType" id="attendanceType" [(ngModel)]="attendanceType">
+                    <option value="WEEKDAY">WEEKDAY</option>
+                    <option value="WEEKEND">WEEKEND</option>
+                    <option value="HOLIDAY">HOLIDAY</option>
+                    <option value="LEAVE">LEAVE</option>
+                </select>
+
+                <button type="submit" class="btn btn-info" (click)="updateAll()" [disabled]="isSaving">
+                    <fa-icon icon="save"></fa-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

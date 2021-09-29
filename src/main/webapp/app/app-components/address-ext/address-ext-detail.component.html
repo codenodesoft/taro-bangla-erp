@@ -1,0 +1,94 @@
+<div class="row justify-content-center">
+    <div class="col-md-12 " *ngIf="showLoader" align="center">
+        <span style="align-content: center;"> <fa-icon align="center" icon="spinner" [pulse]="true" size="7x"></fa-icon></span>
+    </div>
+    <div class="col-md-12" *ngIf="!showLoader">
+        <div *ngIf="address">
+            <h2><span>Address</span></h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row ">
+                <div class="col-md-12"><h3>Present Address</h3></div>
+                <dt class="col-md-2"><span>Division</span></dt>
+                <dd class="col-md-4">
+                    <span *ngIf="address.presentDivision"><b>{{address.presentDivision?.name}}</b></span>
+                </dd>
+                <dt class="col-md-2"><span>District</span></dt>
+                <dd class="col-md-4">
+                    <span><b>{{address.presentDistrict?.name}}</b></span>
+                </dd>
+                <dt class="col-md-2"><span>Thana</span></dt>
+                <dd class="col-md-4">
+                    <span><b>{{address.presentThana?.name}}</b></span>
+                </dd>
+                <div class="col-md-6"></div>
+
+                <dt class="col-md-2"><span>Street</span></dt>
+                <dd class="col-md-10">
+                    <span>{{ address.presentStreet }}</span>
+                </dd>
+                <dt  class="col-md-2"><span>Area</span></dt>
+                <dd  class="col-md-10">
+                    <span>{{ address.presentArea }}</span>
+                </dd>
+                <dt class="col-md-2"><span>Post Code</span></dt>
+                <dd class="col-md-10">
+                    <span>{{ address.presentPostCode }}</span>
+                </dd>
+
+
+            </dl>
+
+            <dl class="row " id="permanentAddress">
+                <div class="col-md-12"><h3>Permanent Address</h3></div>
+                <dt class="col-md-2"><span>Division</span></dt>
+                <dd class="col-md-4">
+                    <div *ngIf="address.permanentDivision">
+                        <span><b>{{address.permanentDivision.name}}</b></span>
+                    </div>
+                </dd>
+                <dt class="col-md-2"><span>District</span></dt>
+                <dd class="col-md-4">
+                    <div *ngIf="address.permanentDistrict">
+                        <span><b>{{address.permanentDistrict.name}}</b></span>
+                    </div>
+                </dd>
+                <dt class="col-md-2"><span>Thana</span></dt>
+                <dd class="col-md-4">
+                    <div *ngIf="address.permanentThana">
+                        <span><b>{{address.permanentThana.name}}</b></span>
+                    </div>
+                </dd>
+                <div class="col-md-6"></div>
+
+                <dt class="col-md-2"><span>Street</span></dt>
+                <dd class="col-md-10">
+                    <span>{{ address.permanentStreet }}</span>
+                </dd>
+                <dt class="col-md-2"><span>Area</span></dt>
+                <dd class="col-md-10">
+                    <span>{{ address.permanentArea }}</span>
+                </dd>
+                <dt class="col-md-2"><span>Post Code</span></dt>
+                <dd class="col-md-10">
+                    <span>{{ address.permanentPostCode }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['../../../address', address.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

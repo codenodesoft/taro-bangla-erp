@@ -1,0 +1,170 @@
+<div>
+    <h2 id="page-heading">
+        <span>Attendance Summary Report</span>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <form>
+        <h4>Daily Report</h4>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Select Date</span>
+            </div>
+            <input type="date" class="form-control" name="selectedDate" [(ngModel)]="selectedDate"
+                   required/>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Attendance Status</span>
+            </div>
+            <select class="form-control" name="status"
+                    [(ngModel)]="status" required>
+                <option value="PRESENT">PRESENT</option>
+                <option value="ABSENT">ABSENT</option>
+                <option value="NOT_APPLICABLE">NOT_APPLICABLE</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Department</span>
+            </div>
+            <select class="form-control" name="department"
+                    [(ngModel)]="department">
+                <option [ngValue]="departmentOption"
+                        *ngFor="let departmentOption of departments;">{{ departmentOption.name }}</option>
+            </select>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Designation</span>
+            </div>
+            <select class="form-control" name="designation"
+                    [(ngModel)]="designation">
+                <option [ngValue]="designationOption"
+                        *ngFor="let designationOption of designations;">{{ designationOption.name }}</option>
+            </select>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Emp Id</span>
+            </div>
+            <input type="text" class="form-control" name="empId" [(ngModel)]="empId"/>
+        </div>
+
+        <div class="input-group mb-3">
+            <button type="submit" class="btn btn-info" (click)="downloadDailyReport()">
+                <fa-icon icon="download"></fa-icon>
+                Download
+            </button>
+        </div>
+    </form>
+
+    <form>
+        <h4>Monthly Report</h4>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Year</span>
+            </div>
+
+            <select class="form-control" name="year"
+                    [(ngModel)]="year" required>
+                <option [ngValue]="yearOption"
+                        *ngFor="let yearOption of years;">{{ yearOption.name }}</option>
+            </select>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Month</span>
+            </div>
+
+            <select class="form-control" name="month"
+                    [(ngModel)]="month" required>
+                <option [ngValue]="monthOption"
+                        *ngFor="let monthOption of months;">{{ monthOption.name }}</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Department</span>
+            </div>
+            <select class="form-control" name="department"
+                    [(ngModel)]="department">
+                <option [ngValue]="departmentOption"
+                        *ngFor="let departmentOption of departments;">{{ departmentOption.name }}</option>
+            </select>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Designation</span>
+            </div>
+            <select class="form-control" name="designation"
+                    [(ngModel)]="designation">
+                <option [ngValue]="designationOption"
+                        *ngFor="let designationOption of designations;">{{ designationOption.name }}</option>
+            </select>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Emp Id</span>
+            </div>
+            <input type="text" class="form-control" name="empId" [(ngModel)]="empId"/>
+        </div>
+
+        <div class="input-group mb-3">
+            <button type="submit" class="btn btn-info" (click)="downloadMonthlyReport()">
+                <fa-icon icon="download"></fa-icon>
+                Download
+            </button>
+        </div>
+    </form>
+
+
+    <form>
+        <h4>Yearly Report</h4>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Year</span>
+            </div>
+
+            <select class="form-control" name="year"
+                    [(ngModel)]="year" required>
+                <option [ngValue]="yearOption"
+                        *ngFor="let yearOption of years;">{{ yearOption.name }}</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Department</span>
+            </div>
+            <select class="form-control" name="department"
+                    [(ngModel)]="department">
+                <option [ngValue]="departmentOption"
+                        *ngFor="let departmentOption of departments;">{{ departmentOption.name }}</option>
+            </select>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Designation</span>
+            </div>
+            <select class="form-control" name="designation"
+                    [(ngModel)]="designation">
+                <option [ngValue]="designationOption"
+                        *ngFor="let designationOption of designations;">{{ designationOption.name }}</option>
+            </select>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Emp Id</span>
+            </div>
+            <input type="text" class="form-control" name="empId" [(ngModel)]="empId"/>
+        </div>
+
+        <div class="input-group mb-3">
+            <button type="submit" class="btn btn-info" (click)="downloadYearlyReport()">
+                <fa-icon icon="download"></fa-icon>
+                Download
+            </button>
+        </div>
+    </form>
+</div>

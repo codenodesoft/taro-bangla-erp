@@ -1,0 +1,175 @@
+<div>
+    <h2 id="page-heading">
+        <span>Attendance Summaries</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-attendance-summary"
+                [routerLink]="['/attendance-summary/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Attendance Summary
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <form>
+        <h4>Filter by Date, Department, Designation & Employee Id</h4>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">From</span>
+            </div>
+            <input type="date" class="form-control" name="start" [(ngModel)]="fromDate"
+                   required/>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">To</span>
+            </div>
+            <input type="date" class="form-control" name="end" [(ngModel)]="toDate"
+                   required/>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Department</span>
+            </div>
+            <select class="form-control" name="department"
+                    [(ngModel)]="department">
+                <option [ngValue]="departmentOption"
+                        *ngFor="let departmentOption of departments;">{{ departmentOption.name }}</option>
+            </select>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Designation</span>
+            </div>
+            <select class="form-control" name="designation"
+                    [(ngModel)]="designation">
+                <option [ngValue]="designationOption"
+                        *ngFor="let designationOption of designations;">{{ designationOption.name }}</option>
+            </select>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Emp Id</span>
+            </div>
+            <input type="text" class="form-control" name="empId" [(ngModel)]="empId"/>
+
+            <button type="submit" class="btn btn-info" (click)="loadPage()">
+                <fa-icon icon="search"></fa-icon>
+            </button>
+        </div>
+    </form>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="attendanceSummaries?.length === 0">
+        <span>No attendanceSummaries found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="attendanceSummaries && attendanceSummaries.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                <th scope="col" jhiSortBy="employee.empId"><span>Employee ID</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="employee.attendanceMachineId"><span>Employee</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="department.name"><span>Department</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="designation.name"><span>Designation</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="inTime"><span>In</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="outTime"><span>Out</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="workingHours"><span>Duration</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="overtime"><span>OT</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="attendanceType"><span>Type</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="attendanceStatus"><span>Status</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let attendanceSummary of attendanceSummaries ;trackBy: trackId">
+                <td>
+                    <div *ngIf="attendanceSummary.employee">
+                        <a [routerLink]="['/employee', attendanceSummary.employee?.id, 'view']">{{ attendanceSummary.employee?.empId }}
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="attendanceSummary.employee">
+                        <a [routerLink]="['/employee', attendanceSummary.employee?.id, 'view']">{{ attendanceSummary.employee?.name }}
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="attendanceSummary.department">
+                        <a [routerLink]="['/department', attendanceSummary.department?.id, 'view']">{{ attendanceSummary.department?.name }}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="attendanceSummary.designation">
+                        <a [routerLink]="['/designation', attendanceSummary.designation?.id, 'view']">{{ attendanceSummary.designation?.name }}</a>
+                    </div>
+                </td>
+                <td>{{ attendanceSummary.inTime | date:'medium' }}</td>
+                <td>{{ attendanceSummary.outTime | date:'medium' }}</td>
+                <td>{{ attendanceSummary.workingHours }}</td>
+                <td>{{ attendanceSummary.overtime }}</td>
+                <td>{{ attendanceSummary.attendanceType }}</td>
+                <td>{{ attendanceSummary.attendanceStatus }}</td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/attendance-summary', attendanceSummary.id, 'view']"
+                                class="btn btn-info btn-sm">
+                            <fa-icon icon="eye"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+
+                        <button type="submit"
+                                [routerLink]="['/attendance-summary', attendanceSummary.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon icon="pencil-alt"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+
+                        <!--<button type="submit" (click)="delete(attendanceSummary)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon icon="times"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>-->
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="attendanceSummaries && attendanceSummaries.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage"
+                            [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                            (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

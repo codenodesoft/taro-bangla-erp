@@ -1,0 +1,54 @@
+<div>
+    <h2 id="page-heading">
+        <span>Records</span>
+
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="festivalAllowancePaymentDtls?.length === 0">
+        <span>No festivalAllowancePaymentDtls found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="festivalAllowancePaymentDtls && festivalAllowancePaymentDtls.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>SN</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="employee.name"><span>Employee</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="amount"><span>Amount</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="status"><span>Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="executedOn"><span>Executed On</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="executedBy"><span>Executed By</span> <fa-icon icon="sort"></fa-icon></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let festivalAllowancePaymentDtl of festivalAllowancePaymentDtls ;trackBy: trackId; index as i">
+                    <td><a [routerLink]="['/festival-allowance-payment-dtl', festivalAllowancePaymentDtl.id, 'view']">{{ (page -1) * itemsPerPage + (i+1)}}</a></td>
+                    <td>
+                        <div *ngIf="festivalAllowancePaymentDtl.employee">
+                            {{ festivalAllowancePaymentDtl.employee?.name }}
+                        </div>
+                    </td>
+                    <td>{{ festivalAllowancePaymentDtl.amount }}</td>
+                    <td>{{ festivalAllowancePaymentDtl.status }}</td>
+                    <td>{{ festivalAllowancePaymentDtl.executedOn | date:'medium' }}</td>
+                    <td>{{ festivalAllowancePaymentDtl.executedBy }}</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="festivalAllowancePaymentDtls && festivalAllowancePaymentDtls.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

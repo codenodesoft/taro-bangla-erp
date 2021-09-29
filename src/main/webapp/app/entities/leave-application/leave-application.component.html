@@ -1,0 +1,171 @@
+<div>
+    <h2 id="page-heading">
+        <span>Leave Applications</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-leave-application"
+                [routerLink]="['/leave-application/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Leave Application
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <form>
+        <h4>Filter by date</h4>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">From</span>
+            </div>
+            <input type="date" class="form-control" name="start" [(ngModel)]="fromDate"
+                   required/>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">To</span>
+            </div>
+            <input type="date" class="form-control" name="start" [(ngModel)]="toDate"
+                   required/>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Department</span>
+            </div>
+            <select class="form-control" name="department"
+                    [(ngModel)]="department">
+                <option [ngValue]="departmentOption"
+                        *ngFor="let departmentOption of departments;">{{ departmentOption.name }}</option>
+            </select>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Designation</span>
+            </div>
+            <select class="form-control" name="designation"
+                    [(ngModel)]="designation">
+                <option [ngValue]="designationOption"
+                        *ngFor="let designationOption of designations;">{{ designationOption.name }}</option>
+            </select>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Emp Id</span>
+            </div>
+            <input type="text" class="form-control" name="empId" [(ngModel)]="empId"/>
+
+            <button type="submit" class="btn btn-info" (click)="loadPage()">
+                <fa-icon icon="search"></fa-icon>
+            </button>
+        </div>
+
+    </form>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="leaveApplications?.length === 0">
+        <span>No leaveApplications found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="leaveApplications && leaveApplications.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                <th scope="col" jhiSortBy="id"><span>ID</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="employee.name"><span>Employee</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="department.name"><span>Department</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="designation.name"><span>Designation</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="leaveType.name"><span>Leave Type</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="from"><span>From</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="to"><span>To</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="totalDays"><span>Total Days</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="status"><span>Status</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let leaveApplication of leaveApplications ;trackBy: trackId">
+                <td><a [routerLink]="['/leave-application', leaveApplication.id, 'view']">{{ leaveApplication.id }}</a>
+                </td>
+                <td>
+                    <div *ngIf="leaveApplication.employee">
+                        <a [routerLink]="['/employee', leaveApplication.employee?.id, 'view']">{{ leaveApplication.employee?.name }}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="leaveApplication.department">
+                        <a [routerLink]="['/department', leaveApplication.department?.id, 'view']">{{ leaveApplication.department?.name }}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="leaveApplication.designation">
+                        <a [routerLink]="['/designation', leaveApplication.designation?.id, 'view']">{{ leaveApplication.designation?.name }}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="leaveApplication.leaveType">
+                        <a [routerLink]="['/leave-type', leaveApplication.leaveType?.id, 'view']">{{ leaveApplication.leaveType?.name }}</a>
+                    </div>
+                </td>
+                <td>{{ leaveApplication.from | date:'mediumDate' }}</td>
+                <td>{{ leaveApplication.to | date:'mediumDate' }}</td>
+                <td>{{ leaveApplication.totalDays }}</td>
+                <td>{{ leaveApplication.status }}</td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/leave-application', leaveApplication.id, 'view']"
+                                class="btn btn-info btn-sm">
+                            <fa-icon icon="eye"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+
+                        <button type="submit"
+                                [routerLink]="['/leave-application', leaveApplication.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon icon="pencil-alt"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+
+                        <!--<button type="submit" (click)="delete(leaveApplication)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon icon="times"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>-->
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="leaveApplications && leaveApplications.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage"
+                            [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                            (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

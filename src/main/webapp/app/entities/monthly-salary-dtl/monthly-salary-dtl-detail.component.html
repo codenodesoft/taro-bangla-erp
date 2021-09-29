@@ -1,0 +1,182 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="monthlySalaryDtl">
+            <h2><span>Monthly Salary Detail of Employee</span> <b>{{ monthlySalaryDtl?.employee?.name! }}</b></h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Gross</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.gross }}</span>
+                </dd>
+                <dt><span>Basic</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.basic }}</span>
+                </dd>
+                <dt><span>Basic Percent</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.basicPercent }}</span>
+                </dd>
+                <dt><span>House Rent</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.houseRent }}</span>
+                </dd>
+                <dt><span>House Rent Percent</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.houseRentPercent }}</span>
+                </dd>
+                <dt><span>Medical Allowance</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.medicalAllowance }}</span>
+                </dd>
+                <dt><span>Medical Allowance Percent</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.medicalAllowancePercent }}</span>
+                </dd>
+                <dt><span>Convince Allowance</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.convinceAllowance }}</span>
+                </dd>
+                <dt><span>Convince Allowance Percent</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.convinceAllowancePercent }}</span>
+                </dd>
+                <dt><span>Food Allowance</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.foodAllowance }}</span>
+                </dd>
+                <dt><span>Food Allowance Percent</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.foodAllowancePercent }}</span>
+                </dd>
+                <dt><span>Fine</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.fine }}</span>
+                </dd>
+                <dt><span>Advance</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.advance }}</span>
+                </dd>
+                <dt><span>Total Working Days</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.totalWorkingDays }}</span>
+                </dd>
+                <dt><span>Regular Leave</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.regularLeave }}</span>
+                </dd>
+                <dt><span>Sick Leave</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.sickLeave }}</span>
+                </dd>
+                <dt><span>Compensation Leave</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.compensationLeave }}</span>
+                </dd>
+                <dt><span>Festival Leave</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.festivalLeave }}</span>
+                </dd>
+                <dt><span>Weekly Leave</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.weeklyLeave }}</span>
+                </dd>
+                <dt><span>Present</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.present }}</span>
+                </dd>
+                <dt><span>Absent</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.absent }}</span>
+                </dd>
+                <dt><span>Total Month Days</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.totalMonthDays }}</span>
+                </dd>
+                <dt><span>Over Time Hour</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.overTimeHour }}</span>
+                </dd>
+                <dt><span>Over Time Salary Hourly</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.overTimeSalaryHourly }}</span>
+                </dd>
+                <dt><span>Over Time Salary</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.overTimeSalary }}</span>
+                </dd>
+                <dt><span>Present Bonus</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.presentBonus }}</span>
+                </dd>
+                <dt><span>Absent Fine</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.absentFine }}</span>
+                </dd>
+                <dt><span>Stamp Price</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.stampPrice }}</span>
+                </dd>
+                <dt><span>Tax</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.tax }}</span>
+                </dd>
+                <dt><span>Others</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.others }}</span>
+                </dd>
+                <dt><span>Total Payable</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.totalPayable }}</span>
+                </dd>
+                <dt><span>Status</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.status }}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.type }}</span>
+                </dd>
+                <dt><span>Executed On</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.executedOn }}</span>
+                </dd>
+                <dt><span>Executed By</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.executedBy }}</span>
+                </dd>
+                <dt><span>Note</span></dt>
+                <dd>
+                    <span>{{ monthlySalaryDtl.note }}</span>
+                </dd>
+                <dt><span>Employee</span></dt>
+                <dd>
+                    <div *ngIf="monthlySalaryDtl.employee">
+                        <a [routerLink]="['/employee', monthlySalaryDtl.employee?.id, 'view']">{{ monthlySalaryDtl.employee?.name }}</a>
+                    </div>
+                </dd>
+                <dt><span>Monthly Salary</span></dt>
+                <dd>
+                    <div *ngIf="monthlySalaryDtl.monthlySalary">
+                        <a [routerLink]="['/monthly-salary', monthlySalaryDtl.monthlySalary?.id, 'view']">{{ monthlySalaryDtl.monthlySalary?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['../../../monthly-salary-dtl', monthlySalaryDtl.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

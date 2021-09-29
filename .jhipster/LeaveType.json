@@ -1,0 +1,42 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [],
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "LeaveTypeName",
+      "fieldValues": "CASUAL_LEAVE,MEDICAL_LEAVE,EARNED_LEAVE,MATERNITY_LEAVE,DUTY_LEAVE",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "totalDays",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "LeaveTypeStatus",
+      "fieldValues": "ACTIVE,INACTIVE",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "changelogDate": "20201226040037",
+  "dto": "no",
+  "searchEngine": false,
+  "service": "serviceClass",
+  "entityTableName": "leave_type",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": true,
+  "pagination": "infinite-scroll"
+}

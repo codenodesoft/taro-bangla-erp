@@ -1,0 +1,137 @@
+{
+  "name": "PersonalInfo",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "banglaName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "photo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "photoId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fatherName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "fatherNameBangla",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "motherName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "motherNameBangla",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "maritalStatus",
+      "fieldType": "MaritalStatus",
+      "fieldValues": "SINGLE,MARRIED"
+    },
+    {
+      "fieldName": "spouseName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "spouseNameBangla",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateOfBirth",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "nationalId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nationalIdAttachment",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "nationalIdAttachmentId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "birthRegistration",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "birthRegistrationAttachment",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "birthRegistrationAttachmentId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "height",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "GenderType",
+      "fieldValues": "MALE,FEMALE,OTHERS"
+    },
+    {
+      "fieldName": "religion",
+      "fieldType": "ReligionType",
+      "fieldValues": "ISLAM,HINDU,BUDDHIST,CHRISTIAN,OTHERS"
+    },
+    {
+      "fieldName": "bloodGroup",
+      "fieldType": "BloodGroupType",
+      "fieldValues": "A_POSITIVE,A_NEGATIVE,B_POSITIVE,B_NEGATIVE,O_POSITIVE,O_NEGATIVE,AB_POSITIVE,AB_NEGATIVE"
+    },
+    {
+      "fieldName": "emergencyContact",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "personalInfo",
+      "relationshipName": "employee",
+      "otherEntityField": "name",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20201127213627",
+  "entityTableName": "personal_info",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

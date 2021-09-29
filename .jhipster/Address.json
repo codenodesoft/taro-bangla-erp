@@ -1,0 +1,128 @@
+{
+  "name": "Address",
+  "fields": [
+    {
+      "fieldName": "presentThanaTxt",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "presentStreet",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "presentStreetBangla",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "presentArea",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "presentAreaBangla",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "presentPostCode",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "presentPostCodeBangla",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "permanentThanaTxt",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "permanentStreet",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "permanentStreetBangla",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "permanentArea",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "permanentAreaBangla",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "permanentPostCode",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "permenentPostCodeBangla",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isSame",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "address",
+      "relationshipName": "employee",
+      "otherEntityField": "name",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "division",
+      "otherEntityRelationshipName": "address",
+      "relationshipName": "presentDivision",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "district",
+      "otherEntityRelationshipName": "address",
+      "relationshipName": "presentDistrict",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "thana",
+      "otherEntityRelationshipName": "address",
+      "relationshipName": "presentThana",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "division",
+      "otherEntityRelationshipName": "address",
+      "relationshipName": "permanentDivision",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "district",
+      "otherEntityRelationshipName": "address",
+      "relationshipName": "permanentDistrict",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "thana",
+      "otherEntityRelationshipName": "address",
+      "relationshipName": "permanentThana",
+      "otherEntityField": "name"
+    }
+  ],
+  "changelogDate": "20201127213727",
+  "entityTableName": "address",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

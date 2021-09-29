@@ -1,0 +1,19 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="kawsu (generated)" id="1629603834044-3">
+        <addColumn tableName="leave_application">
+            <column name="department_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1629603834044-4">
+        <addColumn tableName="leave_application">
+            <column name="designation_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1629603834044-5">
+        <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="leave_application" constraintName="FKce57i02recll9p39co9cr84vu" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="mst_department" validate="true"/>
+    </changeSet>
+    <changeSet author="kawsu (generated)" id="1629603834044-7">
+        <addForeignKeyConstraint baseColumnNames="designation_id" baseTableName="leave_application" constraintName="FKhiqkgkkau86dihuy49wpy440b" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="mst_designation" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

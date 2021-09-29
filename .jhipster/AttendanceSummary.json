@@ -1,0 +1,97 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [
+    {
+      "relationshipName": "employee",
+      "otherEntityName": "employee",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "attendanceMachineId",
+      "otherEntityRelationshipName": "attendanceSummary"
+    },
+    {
+      "relationshipName": "employeeSalary",
+      "otherEntityName": "employeeSalary",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id",
+      "otherEntityRelationshipName": "attendanceSummary"
+    },
+    {
+      "relationshipName": "department",
+      "otherEntityName": "department",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "name",
+      "otherEntityRelationshipName": "attendanceSummary"
+    },
+    {
+      "relationshipName": "designation",
+      "otherEntityName": "designation",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "name",
+      "otherEntityRelationshipName": "attendanceSummary"
+    },
+    {
+      "relationshipName": "line",
+      "otherEntityName": "line",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "name",
+      "otherEntityRelationshipName": "attendanceSummary"
+    },
+    {
+      "relationshipName": "grade",
+      "otherEntityName": "grade",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "name",
+      "otherEntityRelationshipName": "attendanceSummary"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "inTime",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "outTime",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "totalHours",
+      "fieldType": "Duration"
+    },
+    {
+      "fieldName": "workingHours",
+      "fieldType": "Duration"
+    },
+    {
+      "fieldName": "overtime",
+      "fieldType": "Duration"
+    },
+    {
+      "fieldName": "attendanceType",
+      "fieldType": "AttendanceType",
+      "fieldValues": "WEEKDAY,WEEKEND,HOLIDAY,LEAVE"
+    },
+    {
+      "fieldName": "attendanceStatus",
+      "fieldType": "AttendanceStatus",
+      "fieldValues": "PRESENT,ABSENT,NOT_APPLICABLE"
+    },
+    {
+      "fieldName": "remarks",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "attendanceDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "changelogDate": "20210714142846",
+  "dto": "no",
+  "searchEngine": false,
+  "service": "serviceClass",
+  "entityTableName": "attendance_summary",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": true,
+  "pagination": "pagination"
+}

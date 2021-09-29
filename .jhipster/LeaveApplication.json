@@ -1,0 +1,94 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [
+    {
+      "relationshipName": "employee",
+      "otherEntityName": "employee",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": ["required"],
+      "otherEntityField": "name",
+      "otherEntityRelationshipName": "leaveApplication"
+    },
+    {
+      "relationshipName": "leaveType",
+      "otherEntityName": "leaveType",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": ["required"],
+      "otherEntityField": "name",
+      "otherEntityRelationshipName": "leaveApplication"
+    },
+    {
+      "relationshipName": "department",
+      "otherEntityName": "department",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "name",
+      "otherEntityRelationshipName": "leaveApplication"
+    },
+    {
+      "relationshipName": "designation",
+      "otherEntityName": "designation",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "name",
+      "otherEntityRelationshipName": "leaveApplication"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "from",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "to",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "totalDays",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "reason",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "attachment",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "LeaveApplicationStatus",
+      "fieldValues": "PENDING,ACCEPTED,REJECTED",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "appliedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "appliedOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "actionTakenBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "actionTakenOn",
+      "fieldType": "Instant"
+    }
+  ],
+  "changelogDate": "20201226040545",
+  "dto": "no",
+  "searchEngine": false,
+  "service": "serviceClass",
+  "entityTableName": "leave_application",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": true,
+  "pagination": "pagination"
+}
